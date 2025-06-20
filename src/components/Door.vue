@@ -7,6 +7,8 @@
       <div class="number" :class="{ selected }">{{ number }}</div>
       <div class="knob" :class="{ selected }"></div>
     </div>
+    <!-- Explosão -->
+    <div class="explosion" ref="explosion" />
   </div>
 </template>
 
@@ -42,7 +44,7 @@ export default {
       if (this.hasGift) {
         setTimeout(() => this.playGiftSound(), 400);
       } else {
-        this.playErrorSound();
+        this.playErrorExplosion();
       }
     },
     playGiftSound() {
@@ -50,10 +52,25 @@ export default {
       audio.volume = 0.8;
       audio.play();
     },
-    playErrorSound() {
-      const audio = new Audio(require('@/assets/sounds/error.mp3'));
+    playErrorExplosion() {
+      // Som de explosão mais forte
+      const audio = new Audio(require('@/assets/sounds/explosion.mp3'));
       audio.volume = 1.0;
       audio.play();
+
+      // Animação de tremor
+      const doorEl = this.$el.querySelector('.door');
+      if (doorEl) {
+        doorEl.classList.add('error');
+        setTimeout(() => doorEl.classList.remove('error'), 500);
+      }
+
+      // Animação visual de explosão
+      const explosionEl = this.$refs.explosion;
+      if (explosionEl) {
+        explosionEl.classList.add('mega-blast');
+        setTimeout(() => explosionEl.classList.remove('mega-blast'), 600);
+      }
     }
   }
 };
@@ -108,6 +125,19 @@ export default {
   transition: background-color 0.3s;
 }
 
+.door.error {
+  animation: shake 0.4s ease;
+  box-shadow: 0 0 20px 6px red;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
 .number {
   font-weight: bold;
   padding: 10px;
@@ -140,5 +170,51 @@ export default {
 .door.open .knob,
 .door.open .number {
   display: none;
+}
+
+/* Explosão maior */
+.explosion {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.3);
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  background: radial-gradient(circle, #fff, #ff0, red, transparent);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 10;
+  filter: blur(0px);
+}
+
+.explosion.mega-blast {
+  animation: big-boom 0.6s ease-out forwards;
+}
+
+@keyframes big-boom {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) scale(0.3);
+    box-shadow: 0 0 20px 10px #ff0;
+    filter: blur(0px);
+  }
+  40% {
+    transform: translateX(-50%) scale(2.5);
+    box-shadow: 0 0 80px 40px red;
+    filter: blur(3px);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(3.2);
+    box-shadow: 0 0 120px 60px orange;
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.1);
+    box-shadow: none;
+    filter: blur(0px);
+  }
 }
 </style>
