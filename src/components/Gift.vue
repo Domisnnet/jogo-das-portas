@@ -1,6 +1,6 @@
 <template>
     <div class="gift">
-        <p>🎁</p>
+        <img src="../assets/gift.png" alt="Gift" width="200" height="200" />
     </div>
 </template>
 
