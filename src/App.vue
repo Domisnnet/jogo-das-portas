@@ -2,9 +2,15 @@
   <div id="app">
     <h1>Bem-vindo ao Jogo das Portas!!!</h1>
 
+    <!-- Música ambiente com loop -->
+    <audio ref="bgMusic" loop>
+      <source src="@/assets/sounds/surpni.mp3" type="audio/mpeg" />
+      Seu navegador não suporta áudio HTML5.
+    </audio>
+
     <div class="form">
       <div v-if="!started">
-        <label for="portsAmount">Quantas portas?</label>
+        <label for="portsAmount">Número de portas!! </label>
         <input
           type="number"
           id="portsAmount"
@@ -14,7 +20,7 @@
       </div>
 
       <div v-if="!started">
-        <label for="selectedPort">Qual é a porta premiada?</label>
+        <label for="selectedPort">Qual é a porta premiada? </label>
         <input
           type="number"
           id="selectedPort"
@@ -38,7 +44,7 @@
 
 <script>
 import Door from "./components/Door.vue";
-// 📌 ajuste o caminho se necessário
+
 export default {
   name: "App",
   components: { Door },
@@ -60,17 +66,24 @@ export default {
         return;
       }
 
-      // 🔊 Fanfarra
-      const fanfare = new Audio(require("@/assets/sounds/fanfare.mp3"));
-      fanfare.volume = 0.8;
-      fanfare.play();
-
       this.started = true;
+
+      // Define volume e inicia a música ambiente
+      const bgMusic = this.$refs.bgMusic;
+      bgMusic.volume = 0.1; // volume mais baixo
+      bgMusic.play().catch((e) => {
+        console.warn("Interação do usuário necessária para reproduzir áudio:", e);
+      });
     },
 
     resetGame() {
       this.started = false;
       this.selectedPort = null;
+
+      // Para e reseta a música ambiente
+      const bgMusic = this.$refs.bgMusic;
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
     }
   }
 };
@@ -139,7 +152,6 @@ button:hover {
   gap: 20px;
 }
 
-/* ✨ Animação de entrada das portas */
 .door-fade-enter-active {
   transition: all 0.5s ease;
 }

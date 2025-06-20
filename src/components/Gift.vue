@@ -1,6 +1,6 @@
 <template>
     <div class="gift">
-        <img src="../assets/gift.png" alt="Gift" width="200" height="200" />
+        <img src="../assets/img/gift.png" alt="Gift" width="200" height="200" />
     </div>
 </template>
 
