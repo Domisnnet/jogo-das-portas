@@ -149,16 +149,33 @@ button:hover {
 
 .doors {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+}
+
+.door-area {
+  width: 30vw;
+  max-width: 200px;
+  min-width: 120px;
+  height: auto;
+  font-size: 2.5rem;
+}
+
+.door {
+  width: 100%;
+  height: auto;
 }
 
 .door-fade-enter-active {
   transition: all 0.5s ease;
 }
+
 .door-fade-enter-from {
   opacity: 0;
   transform: translateY(20px);
 }
+
 .door-fade-enter-to {
   opacity: 1;
   transform: translateY(0);
