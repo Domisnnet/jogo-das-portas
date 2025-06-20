@@ -96,6 +96,7 @@ export default {
 }
 
 body {
+  min-height: 100vh;
   color: #fff;
   background: linear-gradient(to top, #240b36, #c31432) no-repeat;
   height: 100vh;
@@ -106,6 +107,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100vw;
+  padding: 0 10px;
 }
 
 h1 {
@@ -179,5 +182,22 @@ button:hover {
 .door-fade-enter-to {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    width: 90%;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .form {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  input {
+    width: 60px;
+  }
 }
 </style>
