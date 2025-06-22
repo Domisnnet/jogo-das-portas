@@ -9,7 +9,6 @@
       />
       <Gift v-if="open && hasGift" class="gift" />
     </div>
-    <!-- EXPLOSÃO FORA DA ÁREA DA PORTA -->
     <div class="explosion" ref="explosion" />
   </div>
 </template>
@@ -59,7 +58,7 @@ export default {
     },
     playErrorExplosion() {
       const audio = new Audio(require('@/assets/sounds/explosion.mp3'));
-      audio.volume = 1.0;
+      audio.volume = 0.2;
       audio.play();
 
       this.errorState = true;

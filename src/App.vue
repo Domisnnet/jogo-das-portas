@@ -70,7 +70,7 @@ export default {
 
       // Define volume e inicia a música ambiente
       const bgMusic = this.$refs.bgMusic;
-      bgMusic.volume = 0.1; // volume mais baixo
+      bgMusic.volume = 0.01; 
       bgMusic.play().catch((e) => {
         console.warn("Interação do usuário necessária para reproduzir áudio:", e);
       });

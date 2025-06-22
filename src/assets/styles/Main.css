@@ -13,6 +13,7 @@ html, body {
     background: linear-gradient(to bottom, #3b0060, #3f1b4d);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    overflow: hidden;
 }
   
 #app {
@@ -36,15 +37,15 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 40px;
+    gap: 20px;
+    margin-bottom: 50px;
 }
   
 input {
     padding: 8px;
-    font-size: 1rem;
+    font-size: 2em;
     border-radius: 6px;
-    width: 80px;
+    width: 90px;
 }
   
 button {
