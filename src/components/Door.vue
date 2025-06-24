@@ -5,8 +5,7 @@
         class="door"
         :class="{ open, error: errorState }"
         :style="doorStyle"
-        @click="toggleDoor"
-      />
+        @click="toggleDoor"/>
       <Gift v-if="open && hasGift" class="gift" />
     </div>
     <div class="explosion" ref="explosion" />
@@ -53,7 +52,7 @@ export default {
     },
     playGiftSound() {
       const audio = new Audio(require('@/assets/sounds/wow.mp3'));
-      audio.volume = 0.7;
+      audio.volume = 0.6;
       audio.play();
     },
     playErrorExplosion() {
@@ -118,7 +117,7 @@ export default {
 
 .gift {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
